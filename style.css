@@ -1,0 +1,190 @@
+/* Estilos generales */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+}
+
+/* Menú superior */
+.menu-superior {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #ca0000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+}
+
+/* Lista del menú */
+.menu {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+.menu li {
+    margin: 0;
+    position: relative;
+}
+
+.menu a {
+    display: block;
+    color: white;
+    text-decoration: none;
+    padding: 15px 20px;
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+/* Efecto hover */
+.menu a:hover {
+    background-color: #ff00b7; /* Fondo al pasar el ratón */
+    color: #fff;
+}
+
+/* Título del menú */
+.titulo-menu {
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    margin-right: 20px;
+}
+
+.titulo-menu h1 {
+    margin: 0;
+    padding-left: 10px;
+    font-size: 24px; /* Tamaño del título */
+    color: #ffffff; /* Color del título */
+}
+
+.submenu {
+  list-style: none; /* Quita las viñetas del submenú */
+  display: none; /* Oculto por defecto */
+  position: absolute;
+  top: 100%; /* Aparece debajo del menú principal */
+  left: 0;
+  background-color: rgb(155, 0, 0);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 100;
+  padding: 0; /* Quita el padding adicional */
+}
+
+.submenu li {
+  width: 93px; /* Ancho del submenú */
+}
+
+.submenu li a {
+  color: rgb(255, 255, 255);
+  padding: 10px;
+  display: block; /* Hace que el enlace ocupe todo el espacio */
+  text-align: left; /* Alinea el texto a la izquierda */
+  text-decoration: none; /* Quita el subrayado */
+}
+
+.submenu li a:hover {
+  background-color: #ff00b7;
+}
+
+/* Mostrar el submenú al pasar el cursor */
+.menu li:hover .submenu {
+  display: block;
+}
+
+
+/* Contenido principal */
+.contenido {
+    padding: 50px 20px; /* Espaciado para evitar que el contenido quede debajo del menú */
+    text-align: center;
+}
+
+.contenido h1 {
+    font-size: 36px;
+    color: #000000;
+}
+
+.contenido p {
+    font-size: 18px;
+    color: #000000;
+}
+img {
+    width: 65%; /* Limita el ancho de la imagen al ancho máximo del contenedor */
+    height: auto;    /* Mantiene las proporciones de la imagen */
+    display: block;  /* Elimina espacios blancos extra debajo de la imagen */
+    margin: 0 auto;  /* Opcional: centra la imagen horizontalmente */
+}
+video {
+    width: auto; /* Mantén el ancho proporcional */
+    max-width: 100%; /* Evita que el video exceda el ancho de la pantalla */
+  }
+  .gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Cuadrícula adaptable */
+    gap: 10px;
+  }
+
+  .gallery img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 3/3;
+    object-fit: cover;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: transform 0.3s ease; /* Pequeño efecto hover */
+  }
+
+  .gallery img:hover {
+    transform: scale(1.05); /* Efecto zoom al pasar el mouse */
+  }
+
+  /* Modal para la imagen ampliada */
+  .modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.8); /* Fondo oscuro */
+    display: none; /* Oculto por defecto */
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Encima de todo */
+  }
+
+  .modal img {
+    max-width: 50%; /* Máximo tamaño del modal */
+            max-height: 90%; /* Ajuste dinámico */
+            display: block;
+  }
+
+  /* Para cerrar el modal */
+  .modal-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 30px;
+    color: white;
+    cursor: pointer;
+    z-index: 1001; /* Encima de la imagen */
+  }
+  .modal-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 50px;
+    color: white;
+    cursor: pointer;
+    user-select: none;
+}
+
+.modal-nav.left {
+    left: 20px;
+}
+
+.modal-nav.right {
+    right: 20px;
+}
