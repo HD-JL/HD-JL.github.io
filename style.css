@@ -156,9 +156,11 @@ video {
   }
 
   .modal img {
-    max-width: 50%; /* Máximo tamaño del modal */
-            max-height: 90%; /* Ajuste dinámico */
-            display: block;
+    max-width: 90%; /* La imagen ocupará como máximo el 90% del ancho de la ventana */
+    max-height: 90%; /* La imagen ocupará como máximo el 90% del alto de la ventana */
+    display: block;
+    margin: auto; /* Centrar la imagen dentro del modal */
+    object-fit: contain; /* Mantener las proporciones originales */
   }
 
   /* Para cerrar el modal */
