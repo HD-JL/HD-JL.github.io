@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>FELIZ SAN VALENTÍN</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <nav class="menu-superior">
+            <!-- Menú horizontal a la izquierda -->
+            <ul class="menu">
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="fotos.html">Recuerdos</a></li>
+                <li><a href="galeria.html">Galería</a></li>
+            </ul>
+            <div class="titulo-menu">
+                <h1>San Valentín</h1>
+            </div>
+        </nav>
+        <div class="contenido">
+            <div class="gallery">
+                <img src="i1.jpg" alt="Foto 1" onclick="openModal(this)">
+                <img src="i2.jpg" alt="Foto 1" onclick="openModal(this)">
+                <img src="i3.jpg" alt="Foto 1" onclick="openModal(this)">
+                <img src="i4.png" alt="Foto 1" onclick="openModal(this)">
+                <img src="i5.webp" alt="Foto 1" onclick="openModal(this)">
+                <img src="i6.jpg" alt="Foto 1" onclick="openModal(this)">
+                <img src="i7.jpg" alt="Foto 1" onclick="openModal(this)">
+            </div>
+        </div>
+        <div class="modal" id="modal">
+            <span class="modal-close" onclick="closeModal()">&times;</span> <!-- Botón para cerrar -->
+            <img id="modal-img" src="" alt="Imagen ampliada">
+        </div>
+        <script>
+            const modal = document.getElementById('modal');
+            const modalImg = document.getElementById('modal-img');
+        
+            // Abre el modal con la imagen seleccionada
+            function openModal(img) {
+              modal.style.display = 'flex'; // Mostrar el modal
+              modalImg.src = img.src; // Asignar la imagen al modal
+            }
+        
+            // Cierra el modal
+            function closeModal() {
+              modal.style.display = 'none'; // Ocultar el modal
+            }
+          </script>
+    </body>
+</html>
