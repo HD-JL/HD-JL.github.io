@@ -2,7 +2,8 @@
 body {
     margin: 0;
     font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
+    background-image:url(fondo.jpg);
+    color: white;
 }
 
 /* Menú superior */
@@ -11,7 +12,7 @@ body {
     top: 0;
     left: 0;
     width: 100%;
-    background-color: #ca0000;
+    background-color: #9d1430;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -68,7 +69,7 @@ body {
   position: absolute;
   top: 100%; /* Aparece debajo del menú principal */
   left: 0;
-  background-color: rgb(155, 0, 0);
+  background-color: rgb(81, 0, 0);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   z-index: 100;
   padding: 0; /* Quita el padding adicional */
@@ -104,12 +105,12 @@ body {
 
 .contenido h1 {
     font-size: 36px;
-    color: #000000;
+    color: #ffffff;
 }
 
 .contenido p {
     font-size: 18px;
-    color: #000000;
+    color: #ffffff;
 }
 img {
     width: 65%; /* Limita el ancho de la imagen al ancho máximo del contenedor */
