@@ -12,24 +12,22 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="style.css">
         <style>
-            .video-container {
-                position: relative;
-                overflow: hidden;
-                padding-top: 56.25%; /* Relación 16:9 */
-                cursor: pointer;
-            }
-    
-            .video-container video {
-                position: absolute;
-                top: 0;
-                left: 0;
+            
+            .gallery video {
                 width: 100%;
-                height: 100%;
-                object-fit: cover; /* Corta para que ocupe todo el contenedor */
-            }
-    
-            /* Modal */
-            .modal {
+                aspect-ratio: 16/9; /* Proporción 16:9 para los videos */
+                object-fit: cover; /* Asegura que los videos se adapten sin deformarse */
+                cursor: pointer;
+                border-radius: 8px;
+                transition: transform 0.2s;
+              }
+          
+              .gallery video:hover {
+                transform: scale(1.05); /* Efecto de zoom al pasar el mouse */
+              }
+          
+              /* Modal */
+              .modal {
                 display: none;
                 position: fixed;
                 top: 0;
@@ -40,16 +38,16 @@
                 justify-content: center;
                 align-items: center;
                 z-index: 1000;
-            }
-    
-            .modal video {
-                width: 90%; /* Ocupa el 90% del ancho de la pantalla */
-                height: auto; /* Mantiene la proporción */
-                max-height: 90%; /* Evita que sobresalga de la altura de la pantalla */
+              }
+          
+              .modal video {
+                max-width: 90%; /* Limita el tamaño al 90% del ancho */
+                max-height: 90%; /* Limita el tamaño al 90% del alto */
+                border-radius: 8px;
                 display: block;
-            }
-    
-            .modal-close {
+              }
+          
+              .modal-close {
                 position: absolute;
                 top: 20px;
                 right: 20px;
@@ -58,7 +56,25 @@
                 cursor: pointer;
                 font-weight: bold;
                 z-index: 1001;
-            }
+              }
+          
+              .modal-nav {
+                position: absolute;
+                top: 50%;
+                transform: translateY(-50%);
+                font-size: 50px;
+                color: white;
+                cursor: pointer;
+                user-select: none;
+              }
+          
+              .modal-nav.left {
+                left: 20px;
+              }
+          
+              .modal-nav.right {
+                right: 20px;
+              }
         </style>
     </head>
     <body>
@@ -80,77 +96,70 @@
             </div>
         </nav>
         <div class="contenido">
-            <div class="gallery">
-                <div class="video-container" onclick="openModal('v1.mp4')">
-                    <video>
-                        <source src="v1.mp4" type="video/mp4">
-                        Tu navegador no soporta videos.
-                    </video>
-                </div>
-                <div class="video-container" onclick="openModal('v2.mp4')">
-                    <video >
-                        <source src="v2.mp4" type="video/mp4">
-                        Tu navegador no soporta videos.
-                    </video>
-                </div>
-                <div class="video-container" onclick="openModal('v3.mp4')">
-                    <video >
-                        <source src="v3.mp4" type="video/mp4">
-                        Tu navegador no soporta videos.
-                    </video>
-                </div>
-                <div class="video-container" onclick="openModal('v4.mp4')">
-                    <video >
-                        <source src="v4.mp4" type="video/mp4">
-                        Tu navegador no soporta videos.
-                    </video>
-                </div>
-                <div class="video-container" onclick="openModal('v5.mp4')">
-                    <video >
-                        <source src="v5.mp4" type="video/mp4">
-                        Tu navegador no soporta videos.
-                    </video>
-                </div>
-                <div class="video-container" onclick="openModal('v6.mp4')">
-                    <video >
-                        <source src="v6.mp4" type="video/mp4">
-                        Tu navegador no soporta videos.
-                    </video>
-                </div>
-                <div class="video-container" onclick="openModal('v7.mp4')">
-                    <video >
-                        <source src="v7.mp4" type="video/mp4">
-                        Tu navegador no soporta videos.
-                    </video>
-                </div>
-            </div>
-            
+            <div class="contenido gallery">
+                <video src="v1.mp4" onclick="openModal(0)" ></video>
+                <video src="v2.mp4" onclick="openModal(1)" ></video>
+                <video src="v3.mp4" onclick="openModal(2)" ></video>
+                <video src="v4.mp4" onclick="openModal(3)" ></video>
+                <video src="v5.mp4" onclick="openModal(4)" ></video>
+                <video src="v6.mp4" onclick="openModal(5)" ></video>
+              </div>
         </div>
     
         <!-- Modal para mostrar el video -->
         <div class="modal" id="modal">
             <span class="modal-close" onclick="closeModal()">&times;</span>
-            <video id="modal-video" controls></video>
-        </div>
+            <span class="modal-nav left" onclick="prevVideo()">&#10094;</span>
+            <video id="modal-video" controls autoplay></video>
+            <span class="modal-nav right" onclick="nextVideo()">&#10095;</span>
+          </div>
     
         <script>
             const modal = document.getElementById('modal');
-            const modalVideo = document.getElementById('modal-video');
-    
-            // Abre el modal con el video seleccionado
-            function openModal(videoSrc) {
-                modal.style.display = 'flex'; // Mostrar el modal
-                modalVideo.src = videoSrc; // Asignar la fuente al video
-                modalVideo.muted =false;
-                modalVideo.play(); // Reproducir automáticamente
-            }
-    
-            // Cierra el modal
-            function closeModal() {
-                modal.style.display = 'none'; // Ocultar el modal
-                modalVideo.pause(); // Pausar el video
-                modalVideo.src = ''; // Limpiar la fuente del video
-            }
+    const modalVideo = document.getElementById('modal-video');
+    const videos = document.querySelectorAll('.gallery video'); // Todos los videos
+    let currentIndex = 0;
+
+    // Abre el modal con el video seleccionado
+    function openModal(index) {
+      currentIndex = index;
+      updateModalVideo();
+      modal.style.display = 'flex';
+    }
+
+    // Actualiza el video que se muestra en el modal
+    function updateModalVideo() {
+      modalVideo.src = videos[currentIndex].src;
+    }
+
+    // Cierra el modal
+    function closeModal() {
+      modal.style.display = 'none';
+      modalVideo.pause(); // Detiene la reproducción al cerrar el modal
+    }
+
+    // Navega al video anterior
+    function prevVideo() {
+      currentIndex = (currentIndex - 1 + videos.length) % videos.length; // Cicla al inicio si es necesario
+      updateModalVideo();
+    }
+
+    // Navega al video siguiente
+    function nextVideo() {
+      currentIndex = (currentIndex + 1) % videos.length; // Cicla al inicio si es necesario
+      updateModalVideo();
+    }
+
+    // Cerrar el modal al presionar "Esc"
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeModal();
+      } else if (e.key === 'ArrowLeft') {
+        prevVideo();
+      } else if (e.key === 'ArrowRight') {
+        nextVideo();
+      }
+    });
         </script>
     </body>
 </html>
